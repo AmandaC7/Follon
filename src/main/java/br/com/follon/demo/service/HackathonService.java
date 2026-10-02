@@ -2,6 +2,7 @@ package br.com.follon.demo.service;
 
 import br.com.follon.demo.entity.HackathonEntity;
 import br.com.follon.demo.repository.HackathonRepository;
+import br.com.follon.demo.request.HackathonRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,24 @@ public class HackathonService {
         return hackathonRepository.findById(id);
     }
 
-    public HackathonEntity createHackathon(HackathonEntity hackathon) {
+    public HackathonEntity createHackathon(HackathonRequest hackathon) {
         validateHackathon(hackathon);
-        return hackathonRepository.save(hackathon);
+
+        HackathonEntity entity = new HackathonEntity();
+        entity.setTitle(hackathon.getTitle().trim());
+        entity.setDescription(hackathon.getDescription());
+        entity.setLocation(hackathon.getLocation());
+        entity.setFormat(hackathon.getFormat());
+        entity.setStartDate(hackathon.getStartDate());
+        entity.setEndDate(hackathon.getEndDate());
+        entity.setRegistrationStart(hackathon.getRegistrationStart());
+        entity.setRegistrationEnd(hackathon.getRegistrationEnd());
+        entity.setPrize(hackathon.getPrize());
+
+        return hackathonRepository.save(entity);
     }
 
-    private void validateHackathon(HackathonEntity hackathon) {
+    private void validateHackathon(HackathonRequest hackathon) {
         if (hackathon == null) {
             throw new IllegalArgumentException("Hackathon is required");
         }

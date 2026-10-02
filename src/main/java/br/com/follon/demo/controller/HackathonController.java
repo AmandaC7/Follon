@@ -1,6 +1,7 @@
 package br.com.follon.demo.controller;
 
 import br.com.follon.demo.entity.HackathonEntity;
+import br.com.follon.demo.request.HackathonRequest;
 import br.com.follon.demo.service.HackathonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class HackathonController {
     }
 
     @PostMapping("/hackathons")
-    public ResponseEntity<HackathonEntity> createHackathon(@RequestBody HackathonEntity hackathon) {
+    public ResponseEntity<HackathonEntity> createHackathon(@RequestBody HackathonRequest hackathon) {
         return ResponseEntity.ok(hackathonService.createHackathon(hackathon));
     }
 }

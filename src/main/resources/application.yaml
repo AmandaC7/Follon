@@ -10,9 +10,9 @@ spring:
   application:
     name: ${APP_NAME:demo}
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/follon}
-    username: ${SPRING_DATASOURCE_USERNAME:follon}
-    password: ${SPRING_DATASOURCE_PASSWORD:follon}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
   sql:
     init:

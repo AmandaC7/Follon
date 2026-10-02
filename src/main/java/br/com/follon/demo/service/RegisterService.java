@@ -9,9 +9,11 @@ import br.com.follon.demo.repository.UserRepository;
 import br.com.follon.demo.request.FieldOfInterestRequest;
 import br.com.follon.demo.request.RegisterRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -59,21 +61,42 @@ public class RegisterService {
         UserEntity user;
         user = userMapper.toEntity(registerRequest);
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        userRepository.save(user);
+
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("User already exists");
+        }
     }
 
-    public void registerFieldOfInterest(FieldOfInterestRequest fieldOfInterest) {
-        if (fieldOfInterest == null || fieldOfInterest.getName().isEmpty()) {
-            throw new IllegalArgumentException("Field of interest is required");
+    public void registerFieldOfInterest(List<FieldOfInterestRequest> fieldOfInterests) {
+
+        for (FieldOfInterestRequest fieldOfInterest : fieldOfInterests) {
+            if (fieldOfInterest == null || fieldOfInterest.getName().isEmpty()) {
+                throw new IllegalArgumentException("Field of interest is required");
+            }
+
+            Optional<FieldOfInterestEntity> fieldOfInterestEntity = Optional.empty();
+            List<FieldOfInterestEntity> name = fieldOfInterestRepository.findAll();
+
+            for (FieldOfInterestEntity field : name) {
+                if (field.getName().equals(fieldOfInterest.getName())) {
+                    fieldOfInterestEntity = Optional.of(field);
+                    break;
+                }
+            }
+
+            if (fieldOfInterestEntity.isPresent()) {
+                throw new IllegalArgumentException("Field of interest already exists");
+            }
+
+            fieldOfInterestRepository.save(fieldOfInterestMapper.toEntity(fieldOfInterest));
+
         }
+    }
 
-        Optional<FieldOfInterestEntity> fieldOfInterestEntity = fieldOfInterestRepository.findByName(fieldOfInterest.getName());
-        if (fieldOfInterestEntity.isPresent()) {
-            throw new IllegalArgumentException("Field of interest already exists");
-        }
-
-        fieldOfInterestRepository.save(fieldOfInterestMapper.toEntity(fieldOfInterest));
-
+    public List<FieldOfInterestEntity> getFieldOfInterest(List<FieldOfInterestRequest> fieldOfInterests) {
+        return fieldOfInterestRepository.findAllByNameIn(fieldOfInterests.stream().map(FieldOfInterestRequest::getName).toList());
     }
 
 }

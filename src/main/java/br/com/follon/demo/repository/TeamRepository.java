@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface TeamRepository extends JpaRepository<TeamEntity, Long> {
     List<TeamEntity> findByHackathonId(Long hackathonId);
+    boolean existsByNameIgnoreCase(String name);
 }

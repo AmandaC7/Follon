@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/follon")
 @RequiredArgsConstructor
-public class RegisterController {
+public class UserController {
 
     private final RegisterService service;
 

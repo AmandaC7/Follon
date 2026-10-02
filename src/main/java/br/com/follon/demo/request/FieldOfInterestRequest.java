@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class FieldOfInterestRequest {
 
-    String name;
+    private String name;
 }

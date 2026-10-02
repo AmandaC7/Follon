@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,10 +39,11 @@ public class UserEntity {
     @Column(columnDefinition = "TEXT")
     private String skills;
 
-    @Column(columnDefinition = "BYTEA")
+    @Lob
+    @Column(name = "foto")
     private byte[] foto;
 
     @JdbcTypeCode(SqlTypes.ARRAY)
-    @Column(name = "field_of_interest", columnDefinition = "TEXT[]")
+    @Column(name = "field_of_interest")
     private String[] fieldOfInterest;
 }

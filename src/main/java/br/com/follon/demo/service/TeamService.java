@@ -5,6 +5,7 @@ import br.com.follon.demo.entity.TeamEntity;
 import br.com.follon.demo.repository.HackathonRepository;
 import br.com.follon.demo.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,15 +31,22 @@ public class TeamService {
         if (hackathonId == null) {
             throw new IllegalArgumentException("Hackathon id is required");
         }
+        if (teamRepository.existsByNameIgnoreCase(name.trim())) {
+            throw new IllegalArgumentException("Team name already exists");
+        }
 
         HackathonEntity hackathon = hackathonRepository.findById(hackathonId)
                 .orElseThrow(() -> new IllegalArgumentException("Hackathon not found"));
 
         TeamEntity team = new TeamEntity();
-        team.setName(name);
+        team.setName(name.trim());
         team.setDescription(description);
         team.setHackathon(hackathon);
 
-        return teamRepository.save(team);
+        try {
+            return teamRepository.save(team);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("Team name already exists");
+        }
     }
 }
