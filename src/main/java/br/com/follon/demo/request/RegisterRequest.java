@@ -11,6 +11,7 @@ public class RegisterRequest {
     String name;
     String email;
     String password;
+    String city;
     Blob photo;
     List<FieldOfInterestRequest> fieldOfInterest;
 

@@ -13,7 +13,7 @@ public class LoginService {
 
     public void loginUser(LoginRequest loginRequest) {
 
-        validateUserExistence(loginRequest.getEmail());
+        validateUserExistence(loginRequest.login());
 
     }
 
