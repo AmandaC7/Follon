@@ -5,7 +5,6 @@ import br.com.follon.demo.mapper.UserMapper;
 import br.com.follon.demo.repository.UserRepository;
 import br.com.follon.demo.security.TokenService;
 import br.com.follon.demo.security.UserSecurityAdapter;
-import br.com.follon.demo.service.LoginService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
@@ -35,8 +34,6 @@ class LoginControllerTest {
     UserMapper userMapper;
     @MockitoBean
     AuthenticationManager authenticationManager;
-    @MockitoBean
-    LoginService loginService;
 
     @Test
     void shouldLoginAndReturnToken() throws Exception {

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "\"TEAM\"")
+@Table(name = "team")
 public class TeamEntity {
 
     @Id
@@ -32,4 +32,9 @@ public class TeamEntity {
     @ManyToOne
     @JoinColumn(name = "hackathon_id", nullable = false)
     private HackathonEntity hackathon;
+
+    @ManyToOne
+    @JoinColumn(name = "badge_id")
+    private BadgeEntity badge;
+
 }

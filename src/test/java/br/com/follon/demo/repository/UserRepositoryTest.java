@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 @DataJpaTest(properties = {
         "spring.datasource.url=jdbc:h2:mem:follon;MODE=PostgreSQL;DATABASE_TO_UPPER=false;DB_CLOSE_DELAY=-1",
@@ -26,8 +26,10 @@ class UserRepositoryTest {
         user.setName("Ana");
         user.setEmail("ana@email.com");
         user.setPassword("secret");
+        user.setFoto(new byte[]{1, 2, 3});
         userRepository.save(user);
 
-        assertTrue(userRepository.findByEmail("ana@email.com").isPresent());
+        UserEntity saved = userRepository.findByEmail("ana@email.com").orElseThrow();
+        assertArrayEquals(new byte[]{1, 2, 3}, saved.getFoto());
     }
 }

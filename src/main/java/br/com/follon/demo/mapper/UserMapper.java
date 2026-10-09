@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
+    @Mapping(target = "foto", source = "photo")
     @Mapping(target = "fieldOfInterest", expression = "java(mapFieldOfInterest(userRequest.getFieldOfInterest()))")
     UserEntity toEntity(RegisterRequest userRequest);
 

@@ -1,6 +1,7 @@
 package br.com.follon.demo.service;
 
 import br.com.follon.demo.entity.HackathonEntity;
+import br.com.follon.demo.mapper.HackatonMapper;
 import br.com.follon.demo.repository.HackathonRepository;
 import br.com.follon.demo.request.HackathonRequest;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class HackathonService {
 
     private final HackathonRepository hackathonRepository;
+    private final HackatonMapper hackatonMapper;
 
     public List<HackathonEntity> listHackathons() {
         return hackathonRepository.findAll();
@@ -26,7 +28,10 @@ public class HackathonService {
     public HackathonEntity createHackathon(HackathonRequest hackathon) {
         validateHackathon(hackathon);
 
-        HackathonEntity entity = new HackathonEntity();
+        HackathonEntity entity = (hackatonMapper != null)
+                ? hackatonMapper.toEntity(hackathon)
+                : new HackathonEntity();
+
         entity.setTitle(hackathon.getTitle().trim());
         entity.setDescription(hackathon.getDescription());
         entity.setLocation(hackathon.getLocation());

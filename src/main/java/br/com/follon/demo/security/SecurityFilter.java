@@ -1,7 +1,6 @@
 package br.com.follon.demo.security;
 
 import br.com.follon.demo.entity.UserEntity;
-import br.com.follon.demo.mapper.UserMapper;
 import br.com.follon.demo.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,7 +22,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
