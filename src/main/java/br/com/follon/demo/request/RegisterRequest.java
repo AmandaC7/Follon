@@ -2,7 +2,6 @@ package br.com.follon.demo.request;
 
 import lombok.Data;
 
-import java.sql.Blob;
 import java.util.List;
 
 @Data
@@ -12,7 +11,7 @@ public class RegisterRequest {
     String email;
     String password;
     String city;
-    Blob photo;
+    byte[] photo;
     List<FieldOfInterestRequest> fieldOfInterest;
 
 }

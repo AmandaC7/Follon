@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -46,6 +47,7 @@ class RegisterServiceBehaviorTest {
         request.setName("Ana");
         request.setEmail("ana@email.com");
         request.setPassword("secret");
+        request.setPhoto(new byte[]{1, 2, 3});
         request.setFieldOfInterest(List.of(new FieldOfInterestRequest()));
 
         when(userRepository.findByEmail("ana@email.com")).thenReturn(Optional.empty());
@@ -57,5 +59,6 @@ class RegisterServiceBehaviorTest {
         ArgumentCaptor<UserEntity> captor = ArgumentCaptor.forClass(UserEntity.class);
         verify(userRepository).save(captor.capture());
         assertEquals("encoded-secret", captor.getValue().getPassword());
+        assertArrayEquals(new byte[]{1, 2, 3}, captor.getValue().getFoto());
     }
 }

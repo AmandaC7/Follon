@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "\"SUBMISSION\"")
+@Table(name = "submission")
 public class SubmissionEntity {
 
     @Id
@@ -33,9 +33,7 @@ public class SubmissionEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(length = 255)
     private String github;
 
-    @Column(length = 255)
     private String demo;
 }

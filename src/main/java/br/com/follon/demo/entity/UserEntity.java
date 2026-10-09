@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +16,7 @@ import org.hibernate.type.SqlTypes;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "\"USERS\"")
+@Table(name = "users")
 public class UserEntity {
 
     @Id
@@ -39,8 +38,8 @@ public class UserEntity {
     @Column(columnDefinition = "TEXT")
     private String skills;
 
-    @Lob
-    @Column(name = "foto")
+    @JdbcTypeCode(SqlTypes.VARBINARY)
+    @Column(name = "foto", columnDefinition = "bytea")
     private byte[] foto;
 
     @JdbcTypeCode(SqlTypes.ARRAY)

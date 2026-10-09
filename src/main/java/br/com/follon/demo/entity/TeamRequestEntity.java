@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "\"TEAM_REQUEST\"")
+@Table(name = "team_request")
 public class TeamRequestEntity {
 
     @EmbeddedId

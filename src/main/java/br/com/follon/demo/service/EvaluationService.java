@@ -6,6 +6,7 @@ import br.com.follon.demo.entity.UserEntity;
 import br.com.follon.demo.repository.EvaluationRepository;
 import br.com.follon.demo.repository.SubmissionRepository;
 import br.com.follon.demo.repository.UserRepository;
+import br.com.follon.demo.request.EvaluationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +28,30 @@ public class EvaluationService {
         return evaluationRepository.findBySubmissionId(submissionId);
     }
 
+    public EvaluationEntity createEvaluation(EvaluationRequest request) {
+        if (request == null) {
+            throw new IllegalArgumentException("Evaluation request is required");
+        }
+
+        return createEvaluation(
+                request.getSubmissionId(),
+                request.getJudgeId(),
+                request.getInnovation(),
+                request.getExecution(),
+                request.getDesign(),
+                request.getImpact(),
+                request.getFeedback()
+        );
+    }
+
     public EvaluationEntity createEvaluation(Long submissionId, Long judgeId,
                                             Integer innovation, Integer execution,
-                                            Integer design, Integer impact, String feedback) {
+                                            Integer design, Integer impact,
+                                            String feedback) {
         if (submissionId == null || judgeId == null) {
             throw new IllegalArgumentException("Submission id and judge id are required");
         }
+
         SubmissionEntity submission = submissionRepository.findById(submissionId)
                 .orElseThrow(() -> new IllegalArgumentException("Submission not found"));
         UserEntity judge = userRepository.findById(judgeId)
