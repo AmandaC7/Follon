@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follón - Web3 Hackathon Platform on Solana</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur-md px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <div class="bg-purple-600 text-white p-2 rounded-xl font-bold text-xl flex items-center gap-2 shadow-lg shadow-purple-600/30">
+                <i data-lucide="trophy" class="w-6 h-6"></i>
+                <span>Follón</span>
+            </div>
+            <span class="text-xs bg-purple-950 text-purple-300 border border-purple-800 px-3 py-1 rounded-full font-medium">
+                Solana Hackathon Platform
+            </span>
+        </div>
+
+        <button id="walletBtn" onclick="connectWallet()" class="flex items-center space-x-2 px-5 py-2.5 rounded-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-lg shadow-purple-900/30 transition-all">
+            <i data-lucide="wallet" class="w-4 h-4"></i>
+            <span id="walletText">Conectar Phantom Wallet</span>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8 space-y-8 w-full flex-grow">
+        
+        <!-- Hero Banner -->
+        <section class="bg-gradient-to-r from-purple-900/40 via-indigo-900/30 to-slate-900 border border-purple-800/40 rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+            <div class="relative z-10 max-w-2xl space-y-4">
+                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+                    Plataforma Web3 para Hackathons en <span class="text-purple-400">Solana</span>
+                </h1>
+                <p class="text-slate-300 text-lg">
+                    Construye, compite y registra tu reputación on-chain con logros verificables e insignias NFT.
+                </p>
+                <div class="flex gap-4 pt-2">
+                    <button class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 shadow-md">
+                        <i data-lucide="plus-circle" class="w-5 h-5"></i> Registrar Proyecto
+                    </button>
+                    <button class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-6 py-3 rounded-xl font-medium">
+                        Explorar Equipos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm">Proyectos Entregados</p>
+                    <p class="text-2xl font-bold mt-1 text-white">128</p>
+                </div>
+                <i data-lucide="code-2" class="w-8 h-8 text-purple-400 opacity-80"></i>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm">Desarrolladores Activos</p>
+                    <p class="text-2xl font-bold mt-1 text-white">450+</p>
+                </div>
+                <i data-lucide="users" class="w-8 h-8 text-indigo-400 opacity-80"></i>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm">Insignias On-Chain</p>
+                    <p class="text-2xl font-bold mt-1 text-white">1,024</p>
+                </div>
+                <i data-lucide="award" class="w-8 h-8 text-emerald-400 opacity-80"></i>
+            </div>
+            <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm">Premios Distribuidos</p>
+                    <p class="text-2xl font-bold mt-1 text-white">50,000 SOL</p>
+                </div>
+                <i data-lucide="trophy" class="w-8 h-8 text-amber-400 opacity-80"></i>
+            </div>
+        </div>
+
+        <!-- Project Overview -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-white">Detalles del Proyecto: Follón</h2>
+                    <p class="text-slate-400 text-sm">Estado de validación on-chain y repositorio</p>
+                </div>
+                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs px-3 py-1 rounded-full font-semibold">
+                    Ecosistema Solana Active
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 space-y-4">
+                    <div>
+                        <h3 class="text-sm font-semibold text-purple-400 uppercase tracking-wider">Descripción</h3>
+                        <p class="text-slate-300 mt-1 leading-relaxed">
+                            Follón transforma los hackathons en un ecosistema continuo con reputación on-chain, 
+                            credenciales verificables en Solana y descubrimiento de talento para patrocinadores y empresas Web3.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-sm font-semibold text-purple-400 uppercase tracking-wider">Tecnologías Utilizadas</h3>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <span class="bg-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700">Solana</span>
+                            <span class="bg-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700">Anchor Framework</span>
+                            <span class="bg-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700">Rust</span>
+                            <span class="bg-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700">React / Next.js</span>
+                            <span class="bg-slate-800 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700">Tailwind CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links Card -->
+                <div class="bg-slate-950 p-5 rounded-xl border border-slate-800/80 space-y-4">
+                    <h3 class="text-sm font-semibold text-white">Recursos del Proyecto</h3>
+                    <div class="space-y-2">
+                        <a href="https://github.com/AmandaC7/Follon" target="_blank" class="flex items-center justify-between p-3 rounded-lg bg-slate-900 border border-slate-800 hover:border-purple-500 text-slate-200 transition-colors text-sm">
+                            <span class="flex items-center gap-2">
+                                <i data-lucide="code-2" class="w-4 h-4 text-purple-400"></i> Repositorio GitHub
+                            </span>
+                            <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-4 text-center text-slate-500 text-xs">
+        Follón Platform &copy; 2026 - Solana Renaissance Hackathon Project
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Inicializar íconos
+        lucide.createIcons();
+
+        // Conexión simulada de Wallet
+        function connectWallet() {
+            const btn = document.getElementById('walletBtn');
+            const text = document.getElementById('walletText');
+            
+            text.innerText = "Conectando...";
+            
+            setTimeout(() => {
+                btn.className = "flex items-center space-x-2 px-5 py-2.5 rounded-xl font-semibold bg-slate-800 text-emerald-400 border border-emerald-500/30 transition-all";
+                text.innerText = "Conectado: 7xKX...9P2z";
+            }, 800);
+        }
+    </script>
+</body>
+</html>
